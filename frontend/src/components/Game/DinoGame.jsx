@@ -4,10 +4,10 @@ import { scoreApi } from '../../api/api.js';
 
 // ---- Tunable constants -----------------------------------------------
 const CANVAS_W = 900;
-const CANVAS_H = 300;
-const GROUND_Y = 235;
-const GRAVITY = 0.70;
-const JUMP_VELOCITY = -10.6;
+const CANVAS_H = 440;
+const GROUND_Y = 345;
+const GRAVITY = 0.85;
+const JUMP_VELOCITY = -9.6;
 const BASE_SPEED = 4.2;
 const MAX_SPEED = 14;
 const SPEED_RAMP = 0.00003; // speed gained per frame
