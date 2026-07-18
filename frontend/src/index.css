@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply bg-obsidian text-bone font-body;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(232, 163, 61, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(47, 230, 199, 0.06), transparent 45%);
+}
+
+::selection {
+  background: rgba(232, 163, 61, 0.35);
+}
+
+/* visible keyboard focus ring, respects a11y */
+:focus-visible {
+  outline: 2px solid #2FE6C7;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.resin-panel {
+  background: linear-gradient(160deg, rgba(232,163,61,0.10), rgba(28,24,21,0.9));
+  border: 1px solid rgba(232, 163, 61, 0.25);
+  backdrop-filter: blur(6px);
+}
+
+.pixel-corners {
+  clip-path: polygon(
+    0 8px, 8px 8px, 8px 0,
+    calc(100% - 8px) 0, calc(100% - 8px) 8px, 100% 8px,
+    100% calc(100% - 8px), calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) 100%,
+    8px 100%, 8px calc(100% - 8px), 0 calc(100% - 8px)
+  );
+}
