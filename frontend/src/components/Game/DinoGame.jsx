@@ -16,12 +16,12 @@ const COINS_FOR_SHIELD = 6;
 const SHIELD_DURATION_FRAMES = 210;
 const LOCAL_BEST_KEY = 'amber_runner_local_best';
 
-const DAY_SKY_TOP = [46, 40, 33];
-const DAY_SKY_BOTTOM = [18, 15, 12];
-const NIGHT_SKY_TOP = [10, 12, 22];
-const NIGHT_SKY_BOTTOM = [5, 5, 10];
+const DAY_SKY_TOP = [92, 78, 58];
+const DAY_SKY_BOTTOM = [42, 34, 26];
+const NIGHT_SKY_TOP = [26, 30, 52];
+const NIGHT_SKY_BOTTOM = [14, 14, 24];
 
-function lerp(a, b, t) {S
+function lerp(a, b, t) {
   return a + (b - a) * t;
 }
 function lerpColor(c1, c2, t) {
@@ -209,13 +209,17 @@ export default function DinoGame() {
     const ctx = canvas.getContext('2d');
 
     const tick = () => {
-      const s = stateRef.current;
-      if (phase === 'playing' && s) {
-        step(s, ctx);
-      } else if (s) {
-        draw(s, ctx, phase);
-      } else {
-        drawEmpty(ctx);
+      try {
+        const s = stateRef.current;
+        if (phase === 'playing' && s) {
+          step(s, ctx);
+        } else if (s) {
+          draw(s, ctx, phase);
+        } else {
+          drawEmpty(ctx);
+        }
+      } catch (err) {
+        console.error('Amber Runner render error:', err);
       }
       rafRef.current = requestAnimationFrame(tick);
     };
@@ -390,7 +394,7 @@ export default function DinoGame() {
     ctx.fill();
 
     // distant dunes (parallax)
-    ctx.fillStyle = night ? '#161310' : '#241f19';
+    ctx.fillStyle = night ? '#242038' : '#3a2f22';
     ctx.beginPath();
     ctx.moveTo(0, GROUND_Y + 10);
     for (let x = 0; x <= CANVAS_W; x += 30) {
@@ -495,6 +499,8 @@ export default function DinoGame() {
     const bodyY = duck ? 8 : 10;
     const bodyH = duck ? p.h - 12 : p.h - 16;
     ctx.fillStyle = bodyColor;
+    ctx.strokeStyle = 'rgba(18,16,14,0.6)';
+    ctx.lineWidth = 1.5;
 
     // tail
     ctx.beginPath();
@@ -503,6 +509,7 @@ export default function DinoGame() {
     ctx.lineTo(5, bodyY + bodyH * 0.8);
     ctx.closePath();
     ctx.fill();
+    ctx.stroke();
 
     // body
     ctx.beginPath();
@@ -512,6 +519,7 @@ export default function DinoGame() {
       ctx.rect(2, bodyY, p.w - 16, bodyH);
     }
     ctx.fill();
+    ctx.stroke();
 
     // back spikes
     ctx.beginPath();
@@ -529,12 +537,14 @@ export default function DinoGame() {
     ctx.beginPath();
     ctx.arc(headCX, headCY, 12, 0, Math.PI * 2);
     ctx.fill();
+    ctx.stroke();
     ctx.beginPath();
     ctx.moveTo(headCX + 7, headCY - 5);
     ctx.lineTo(headCX + 19, headCY - 1);
     ctx.lineTo(headCX + 7, headCY + 7);
     ctx.closePath();
     ctx.fill();
+    ctx.stroke();
 
     // eye
     ctx.fillStyle = '#12100E';
