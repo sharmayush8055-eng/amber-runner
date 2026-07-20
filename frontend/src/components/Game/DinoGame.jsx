@@ -6,8 +6,8 @@ import { scoreApi } from '../../api/api.js';
 const CANVAS_W = 900;
 const CANVAS_H = 440;
 const GROUND_Y = 345;
-const GRAVITY = 0.85;
-const JUMP_VELOCITY = -9.6;
+const GRAVITY = 0.72;
+const JUMP_VELOCITY = -11.2;
 const BASE_SPEED = 4.2;
 const MAX_SPEED = 14;
 const SPEED_RAMP = 0.00003; // speed gained per frame
@@ -21,7 +21,7 @@ const DAY_SKY_BOTTOM = [18, 15, 12];
 const NIGHT_SKY_TOP = [10, 12, 22];
 const NIGHT_SKY_BOTTOM = [5, 5, 10];
 
-function lerp(a, b, t) {
+function lerp(a, b, t) {S
   return a + (b - a) * t;
 }
 function lerpColor(c1, c2, t) {
